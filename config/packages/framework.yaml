@@ -1,0 +1,7 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    default_locale: fr
+    serializer:
+        enabled: true
+    php_errors:
+        log: true
