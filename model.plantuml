@@ -1,0 +1,95 @@
+@startuml
+
+package App\Entity {
+
+    class Ad {
+      -int id
+      -string title
+      -string content
+    }
+
+    class User {
+      -int id
+      -string firstName
+      -string lastName
+      -string email
+      -string password
+    }
+
+    class Category {
+      -string name
+    }
+
+    class Job {
+      -int salary
+      -string contractType
+    }
+
+    class Vehicle {
+      -int price
+      -string fuelType
+    }
+
+    class Property {
+      -int surface
+      -int price
+    }
+
+    class Other {
+    }
+
+}
+
+package App\Factory {
+
+    abstract class AbstractAdFactory {
+      +AbstractAdFactory {static} getFactory(string adType)
+      +AbstractAdFactory {abstract} {static} instantiate()
+      +Ad {abstract} {static} createEntity()
+    }
+
+    class JobFactory {
+      -JobFactory instance
+      +JobFactory {static} instantiate()
+      +Job {static} createEntity()
+    }
+
+    class VehicleFactory {
+      -VehicleFactory instance
+      +VehicleFactory {static} instantiate()
+      +Vehicle {static} createEntity()
+    }
+
+    class PropertyFactory {
+      -PropertyFactory instance
+      +PropertyFactory {static} instantiate()
+      +Property {static} createEntity()
+    }
+
+    class OtherFactory {
+      -OtherFactory instance
+      +OtherFactory {static} instantiate()
+      +Other {static} createEntity()
+    }
+
+}
+
+User "1"-down-"0..*" Ad
+Category "1" -[norank]- "0..*" Ad
+
+Ad <|-- Job
+Ad <|-- Vehicle
+Ad <|-- Property
+Ad <|-- Other
+
+AbstractAdFactory <|-up- OtherFactory
+AbstractAdFactory <|-up- PropertyFactory
+AbstractAdFactory <|-up- VehicleFactory
+AbstractAdFactory <|-up- JobFactory
+
+Job .down. JobFactory : < instantiate
+Vehicle .down. VehicleFactory : < instantiate
+Property .down. PropertyFactory : < instantiate
+Other .down. OtherFactory : < instantiate
+
+@enduml
