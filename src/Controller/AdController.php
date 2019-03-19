@@ -49,4 +49,15 @@ class AdController extends AbstractController
         $response = $this->get('serializer')->serialize($ad, 'json');
         return new Response($response, 201);
     }
+
+    /**
+     * @Rest\Get("/ads", name="get_ads")
+     *
+     * @return Response
+     */
+    public function getAll() {
+        $ads = $this->getDoctrine()->getManager()->getRepository(Ad::class)->findAll();
+        $response = $this->get('serializer')->serialize($ads, 'json');
+        return new Response($response);
+    }
 }

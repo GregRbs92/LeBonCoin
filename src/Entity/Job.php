@@ -12,13 +12,6 @@ class Job extends Ad
     protected $type = 'job';
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $contractType;
@@ -27,11 +20,6 @@ class Job extends Ad
      * @ORM\Column(type="integer")
      */
     private $salary;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getContractType(): ?string
     {

@@ -12,13 +12,6 @@ class Property extends Ad
     protected $type = 'property';
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $surface;
@@ -27,11 +20,6 @@ class Property extends Ad
      * @ORM\Column(type="integer")
      */
     private $price;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getSurface(): ?int
     {
