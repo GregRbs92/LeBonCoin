@@ -3,8 +3,9 @@
 namespace App\Factory\Ad;
 
 use App\Entity\Property;
+use App\Factory\FactoryInterface;
 
-class PropertyFactory extends AbstractAdFactory
+class PropertyFactory extends AbstractAdFactory implements FactoryInterface
 {
     private static $instance;
 

@@ -14,7 +14,4 @@ abstract class AbstractAdFactory
             default: return OtherFactory::instantiate();
         }
     }
-
-    public static abstract function instantiate();
-    public static abstract function createEntity();
 }

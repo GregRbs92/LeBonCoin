@@ -3,8 +3,9 @@
 namespace App\Factory\Ad;
 
 use App\Entity\Vehicle;
+use App\Factory\FactoryInterface;
 
-class VehicleFactory extends AbstractAdFactory
+class VehicleFactory extends AbstractAdFactory implements FactoryInterface
 {
     private static $instance;
 
