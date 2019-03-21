@@ -44,8 +44,11 @@ package App\Factory {
 
     abstract class AbstractAdFactory {
       +AbstractAdFactory {static} getFactory(string adType)
-      +AbstractAdFactory {abstract} {static} instantiate()
-      +Ad {abstract} {static} createEntity()
+    }
+
+    interface FactoryInterface {
+      + {abstract} {static} instantiate()
+      + {abstract} {static} createEntity()
     }
 
     class JobFactory {
@@ -86,6 +89,11 @@ AbstractAdFactory <|-up- OtherFactory
 AbstractAdFactory <|-up- PropertyFactory
 AbstractAdFactory <|-up- VehicleFactory
 AbstractAdFactory <|-up- JobFactory
+
+FactoryInterface <|.up. OtherFactory
+FactoryInterface <|.up. PropertyFactory
+FactoryInterface <|.up. VehicleFactory
+FactoryInterface <|.up. JobFactory
 
 Job .down. JobFactory : < instantiate
 Vehicle .down. VehicleFactory : < instantiate
