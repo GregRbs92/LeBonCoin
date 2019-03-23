@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\JobRepository")
@@ -13,11 +14,13 @@ class Job extends Ad
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"full_ad"})
      */
     private $contractType;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"full_ad"})
      */
     private $salary;
 

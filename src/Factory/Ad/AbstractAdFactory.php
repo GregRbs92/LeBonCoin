@@ -2,9 +2,11 @@
 
 namespace App\Factory\Ad;
 
+use App\Factory\FactoryInterface;
+
 abstract class AbstractAdFactory
 {
-    public static function getFactory(string $adCategory): AbstractAdFactory
+    public static function getFactory(string $adCategory): FactoryInterface
     {
         switch ($adCategory) {
             case 'job': return JobFactory::instantiate();
