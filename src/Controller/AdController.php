@@ -6,6 +6,7 @@ use App\Entity\Ad;
 use App\Entity\Category;
 use App\Factory\Ad\AbstractAdFactory;
 use App\Utils\AdService;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,28 +26,15 @@ class AdController extends AbstractController
      */
     public function create(Request $request, AdService $adService, EntityManagerInterface $em)
     {
+        // Get request's fields
         $body = $request->request->all();
-        $adCategory = 'other';
-        // Get the ad's category and delete category from request's body
-        if (isset($body['category'])) {
-            $adCategory = $body['category'];
-            unset($body['category']);
+        // Create new ad
+        try {
+            $ad = $adService->create($body);
+        } catch (NotNullConstraintViolationException $exception) {
+            throw new HttpException(400, 'Fields are missing');
         }
-        // Get the appropriate entity thanks to factories
-        $factory = AbstractAdFactory::getFactory($adCategory);
-        /** @var Ad $ad */
-        $ad = $factory::createEntity();
-        // Set the fields of the ad
-        $ad = $adService->setFields($body, $ad);
-        // Set ad's owner
-        $ad->setOwner($this->getUser());
-        // Get the ad's category from the database
-        $category = $em->getRepository(Category::class)->find($ad->getType());
-        $ad->setCategory($category);
-        // Persist the new entity
-        $em->persist($ad);
-        $em->flush();
-
+        // Send response
         $response = $this->get('serializer')->serialize($ad, 'json', ['groups' => ['full_ad']]);
         return new Response($response, 201);
     }
