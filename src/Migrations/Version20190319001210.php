@@ -22,12 +22,12 @@ final class Version20190319001210 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE category (name VARCHAR(255) NOT NULL, PRIMARY KEY(name)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE ad (id INT AUTO_INCREMENT NOT NULL, category_id VARCHAR(255) NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, type VARCHAR(255) NOT NULL, INDEX IDX_77E0ED5812469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE category (name VARCHAR(190) NOT NULL, PRIMARY KEY(name)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE ad (id INT AUTO_INCREMENT NOT NULL, category_id VARCHAR(190) NOT NULL, title VARCHAR(190) NOT NULL, content LONGTEXT NOT NULL, type VARCHAR(190) NOT NULL, INDEX IDX_77E0ED5812469DE2 (category_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE other (id INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE property (id INT NOT NULL, surface INT NOT NULL, price INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE vehicle (id INT NOT NULL, fuel_type VARCHAR(255) NOT NULL, price INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE job (id INT NOT NULL, contract_type VARCHAR(255) NOT NULL, salary INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE vehicle (id INT NOT NULL, fuel_type VARCHAR(190) NOT NULL, price INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE job (id INT NOT NULL, contract_type VARCHAR(190) NOT NULL, salary INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE ad ADD CONSTRAINT FK_77E0ED5812469DE2 FOREIGN KEY (category_id) REFERENCES category (name)');
         $this->addSql('ALTER TABLE other ADD CONSTRAINT FK_D9583520BF396750 FOREIGN KEY (id) REFERENCES ad (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE property ADD CONSTRAINT FK_8BF21CDEBF396750 FOREIGN KEY (id) REFERENCES ad (id) ON DELETE CASCADE');
