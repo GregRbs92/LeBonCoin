@@ -6,6 +6,13 @@
 
 You need to have **Docker** and **Docker Compose** installed on your machine.
 
+### Install dependencies
+
+This project use Composer, run:
+```
+composer install
+```
+
 ### Launch the containers
 
 This application is dockerized and the MySQL, Nginx and PHP containers are managed by **Docker Compose**.
